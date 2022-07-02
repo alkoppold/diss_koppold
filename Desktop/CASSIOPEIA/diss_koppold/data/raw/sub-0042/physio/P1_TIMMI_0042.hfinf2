@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<HistoryInfoFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <HeaderFilename>C:\Users\koppold\Desktop\fear_profiles\TIMMI\sub-0042\physio\P1_TIMMI_0042.ahdr</HeaderFilename>
+  <RawFilename>C:\Users\koppold\Desktop\fear_profiles\TIMMI\sub-0042\physio\P1_TIMMI_0042.eeg</RawFilename>
+  <AppendedFiles />
+  <Sequence>1</Sequence>
+  <Sequences>1</Sequences>
+  <Nodes>
+    <string>P1_TIMMI_0042/Raw Data</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation/MinMax Markers</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation/MinMax Markers/Artifact Rejection</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation/MinMax Markers/Artifact Rejection/Peak Export</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation 2</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation 2/MinMax Markers</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation 2/MinMax Markers/Artifact Rejection</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation 2/MinMax Markers/Artifact Rejection/Peak Export</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 2</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 2/Formula Evaluator</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 2/Formula Evaluator/Filters</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 2/Formula Evaluator/Filters/Segmentation</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 2/Formula Evaluator/Filters/Segmentation/MinMax Markers</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 2/Formula Evaluator/Filters/Segmentation/MinMax Markers/MinMax Markers</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 3</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 3/Filters</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 3/Filters/Segmentation</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 3/Filters/Segmentation/EKGMarker</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 3/Filters/Segmentation/EKGMarker/Heart Rate Channel</string>
+    <string>P1_TIMMI_0042/Raw Data/Edit Channels 3/Filters/Segmentation/EKGMarker/Heart Rate Channel/Marker Timing</string>
+  </Nodes>
+  <TIDs>
+    <guid>00000000-0000-0000-0000-000000000000</guid>
+    <guid>59f7b5eb-897c-453d-8293-c8b7b4c7a896</guid>
+    <guid>631c178b-690d-4b73-b5e8-791e5609ff2c</guid>
+    <guid>2209d86c-86c6-4283-8e01-ef552a4f482b</guid>
+    <guid>a56c3106-9333-41d9-98ee-14c89b1f4432</guid>
+    <guid>519296ef-4f7d-4cd6-859f-1e9ae67e359a</guid>
+    <guid>98dd5fd4-7e6a-405d-95e9-e243792a853f</guid>
+    <guid>141c36cf-054c-4911-9de3-ef4721fe283c</guid>
+    <guid>8d402796-04f0-4273-a3f2-b9d5a6c9a03c</guid>
+    <guid>63d31093-4b2f-4314-9f68-76c2b4cbbe60</guid>
+    <guid>52433fc2-e11b-4f16-b7dd-e5c01b677b62</guid>
+    <guid>bd946bf1-0375-43a3-bb56-d6ffb98fc0a3</guid>
+    <guid>476ec128-0723-49bf-8bb5-d898cb89d3ac</guid>
+    <guid>0a9f0616-cba4-4063-b1a7-4ef31342e8cb</guid>
+    <guid>51ca8043-5d3c-4c96-ab2a-f96351ef2d40</guid>
+    <guid>ae22c2d4-39e7-4b06-9f7b-6f737d4f5acd</guid>
+    <guid>510870c8-b544-41fb-b3be-7235b2b714c6</guid>
+    <guid>c0b1dd05-6f2c-4080-ba43-1af54723b97c</guid>
+    <guid>e713f047-d462-4365-83cf-c8c331619e8e</guid>
+    <guid>a5d5c57a-f163-4262-947e-234408a39057</guid>
+    <guid>dadef051-0370-4913-a04a-e7afc2bb3227</guid>
+    <guid>11bd812a-0fbe-4c67-a0fe-b1104025da90</guid>
+    <guid>cdc975ef-de76-46ab-b56c-36205eccedb1</guid>
+    <guid>4d17a234-5335-43b9-9800-1e17c24cd383</guid>
+    <guid>481d57f2-e01e-48b0-a0c5-167ec992951e</guid>
+    <guid>a380ecfd-5b79-47b8-ae47-a49ce3bca56f</guid>
+  </TIDs>
+  <ReaderID>1ed6c65b-ff2f-428b-b2d1-c377aaa782bd</ReaderID>
+  <RegistrationID>00000000-0000-0000-0000-000000000000</RegistrationID>
+  <User>koppold</User>
+  <Computer>ISNB05CDA839290</Computer>
+</HistoryInfoFile>

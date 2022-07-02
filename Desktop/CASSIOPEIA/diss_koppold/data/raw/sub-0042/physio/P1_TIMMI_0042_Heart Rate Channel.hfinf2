@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<HistoryInfoFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <HeaderFilename>C:\Users\koppold\Desktop\fear_profiles\TIMMI\sub-0042\physio\P1_TIMMI_0042_Heart Rate Channel.xhdr</HeaderFilename>
+  <RawFilename>C:\Users\koppold\Desktop\fear_profiles\TIMMI\sub-0042\physio\P1_TIMMI_0042_Heart Rate Channel.dat</RawFilename>
+  <AppendedFiles />
+  <Sequence>1</Sequence>
+  <Sequences>1</Sequences>
+  <Nodes>
+    <string>P1_TIMMI_0042_Heart Rate Channel/Raw Data</string>
+  </Nodes>
+  <TIDs>
+    <guid>00000000-0000-0000-0000-000000000000</guid>
+  </TIDs>
+  <ReaderID>00000000-0000-0000-0000-000000000000</ReaderID>
+  <RegistrationID>00000000-0000-0000-0000-000000000000</RegistrationID>
+  <User>koppold</User>
+  <Computer>ISNB05CDA839290</Computer>
+</HistoryInfoFile>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<HistoryInfoFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <HeaderFilename>C:\Users\koppold\Desktop\fear_profiles\TIMMI\sub-0041\physio\P1_TIMMI_0041.ahdr</HeaderFilename>
+  <RawFilename>C:\Users\koppold\Desktop\fear_profiles\TIMMI\sub-0041\physio\P1_TIMMI_0041.eeg</RawFilename>
+  <AppendedFiles />
+  <Sequence>1</Sequence>
+  <Sequences>1</Sequences>
+  <Nodes>
+    <string>P1_TIMMI_0041/Raw Data</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation/MinMax Markers</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation/MinMax Markers/Artifact Rejection</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation/MinMax Markers/Artifact Rejection/Peak Export</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation 2</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation 2/MinMax Markers</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation 2/MinMax Markers/Artifact Rejection</string>
+    <string>P1_TIMMI_0041/Raw Data/Edit Channels/Formula Evaluator/Filters/Rectify/Moving Average/Segmentation 2/MinMax Markers/Artifact Rejection/Peak Export</string>
+  </Nodes>
+  <TIDs>
+    <guid>00000000-0000-0000-0000-000000000000</guid>
+    <guid>4cdb6ff8-9662-4fba-9478-7695c88a4d7b</guid>
+    <guid>695eee15-2311-45bd-b6cb-14cbb3d6f140</guid>
+    <guid>12e669b2-ae08-4e8e-ba6a-ad5767bdef71</guid>
+    <guid>dc96091e-7160-4030-9361-560ccd436a46</guid>
+    <guid>dc84d1c8-ac11-4101-abb6-dc7a340cdfab</guid>
+    <guid>d9157229-4f19-4fd8-bd73-606ec7edae3d</guid>
+    <guid>b9f84c8c-bcc9-4e05-8ccd-04a2c0741650</guid>
+    <guid>9a8e01b7-b153-4d18-a0b2-f2c50f673499</guid>
+    <guid>ed2f8075-e8ac-4dde-b967-fdaebfcb9c86</guid>
+    <guid>00572cce-8962-4256-a584-2b701e83d52b</guid>
+    <guid>75f90b9d-d23b-4ab8-9524-ae265145c03c</guid>
+    <guid>bd34dc62-98f7-428a-95cf-0c9cd3317e33</guid>
+    <guid>ef533b51-6c78-4ba8-9641-a3ceb1c0d2dd</guid>
+  </TIDs>
+  <ReaderID>1ed6c65b-ff2f-428b-b2d1-c377aaa782bd</ReaderID>
+  <RegistrationID>00000000-0000-0000-0000-000000000000</RegistrationID>
+  <User>koppold</User>
+  <Computer>ISNB05CDA839290</Computer>
+</HistoryInfoFile>

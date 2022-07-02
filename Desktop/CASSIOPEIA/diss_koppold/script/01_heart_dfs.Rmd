@@ -1,0 +1,86 @@
+---
+title: "01_heart_dfs"
+author: "Alina Koppold"
+date: '2022-06-27'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+rm(list = ls())
+
+library(dplyr)
+library(data.table)
+library(readr)
+library(purrr)
+library(ggplot2)
+```
+
+```{r data-prep}
+
+
+tbl_heart <- 
+    list.files("./data/preprocessed", 
+             pattern="*.txt",
+             full.names = T) %>% 
+    map_df(~fread(.), rbind, .id = 'trialnr') %>% 
+  group_by(trialnr) %>% mutate(IBI_order=seq(n())) %>%
+  ungroup() %>%
+  rename( IBI_value = V1) 
+
+
+tbl_heart$trialnr = as.numeric(as.character(tbl_heart$trialnr))
+tbl_heart = tbl_heart%>% filter(trialnr > 8) # remove 8 exercise trials
+tbl_heart$trialnr = tbl_heart$trialnr -8 # remove 8 exercise trials
+
+table(tbl_heart$IBI_order)
+range(tbl_heart$IBI_value) # 562 946
+
+
+```
+
+```{r}
+ alinatheme = theme_minimal() + 
+  theme(
+    axis.text.x = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 14, face = "bold"),
+    axis.title.y = element_text(size = 12),
+    axis.title.x = element_text(size = 12),
+    legend.title = element_text(size = 14),
+    text = element_text(size = 14)
+  ) %>% saveRDS('./functions/alinatheme.rds')
+```
+
+
+```{r behave-data-prep}
+tbl_behave <- 
+    list.files("C:/Users/koppold/Desktop/TIMMI/sub-0045/behave", 
+             pattern="*behav.txt",
+             full.names = T) %>% 
+    map_df(~fread(.), rbind) %>% filter(trialnr != "ex")
+  
+tbl_behave_sub =  tbl_behave %>%
+   select(ID, sex, counterbalance, opponent, trialnr, blink, blinktime) %>%
+  group_by(ID, sex, counterbalance, opponent, trialnr, blink, blinktime) %>%
+  unique() 
+
+# other important variables: marker, click_check, shock_check, RT, startle
+
+df = merge(tbl_behave_sub, tbl_heart, by = "trialnr", all = T)
+```
+
+
+```{r line-plot}
+# ggplot(data=tbl_heart, aes(x=IBI_order, y=IBI_value, color=trialnr)) +
+#   geom_line()+
+#   geom_point()
+
+ggplot(data=na.omit(df), aes(x=IBI_order, y=IBI_value, color=blink)) +
+  geom_smooth()+ 
+  geom_point(alpha = 0.1) + 
+  facet_wrap(.~opponent +counterbalance)+
+  alinatheme +
+  scale_color_manual(values = c("black", "blue", "yellow"))
+```
+

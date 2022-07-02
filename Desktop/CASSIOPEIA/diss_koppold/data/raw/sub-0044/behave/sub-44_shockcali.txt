@@ -1,0 +1,26 @@
+ID	age	gender	investigator	typeshock	shockamplitude	rating
+44	24	female	perception	0.1	Nein
+44	24	female	perception	0.1	Nein
+44	24	female	perception	0.2	Nein
+44	24	female	perception	0.2	Nein
+44	24	female	perception	0.30000000000000004	Nein
+44	24	female	perception	0.30000000000000004	Nein
+44	24	female	perception	0.4	Ja
+44	24	female	perception	0.4	Ja
+44	24	female	shock	1	None
+44	24	female	shock	1	6
+44	24	female	shock	1	6
+44	24	female	shock	1	6
+44	24	female	shock	1	6
+44	24	female	shock	1	6
+44	24	female	shock	1	6
+44	24	female	shock	1.5	None
+44	24	female	shock	1.5	None
+44	24	female	shock	1.5	None
+44	24	female	shock	1.5	None
+44	24	female	shock	1.5	None
+44	24	female	shock	1.5	None
+44	24	female	shock	1.5	None
+44	24	female	shock	1.5	None
+44	24	female	shock	1.5	7
+44	24	female	shock	1.5	7
