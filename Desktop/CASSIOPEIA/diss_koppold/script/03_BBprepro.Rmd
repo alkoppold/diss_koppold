@@ -10,9 +10,42 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(signal)
 library(ggplot2)
+library(dplyr)
 ```
 
 ```{r load-data}
 load("./data/merged/behave_bb.RData")
+```
+
+```{r single-subject-bandpassfiltering}
+sub45 = subset(behave_bb, ID == 45) %>% select(ID, COPY, trialnr)
+class(sub45$COPY)
+```
+
+```{r filtering-seewave}
+f = 100 # sampling rate
+low = 0.01
+high = 10
+sub45$res = seewave::bwfilter(sub45$COPY, f = f, from = low, to = high, bandpass = T, n= 4)
+
+plot(sub45$COPY, type = "l", col = "grey", main = "seewave_pass")
+lines(sub45$res, col = "blue")
+```
+
+```{r filtering-signal}
+bf = butter(n =4, W= c(low/50, high/50), type = c("pass"))
+freqz(bf, Fs = 100)
+
+sub45$res2 = signal::filter(bf, sub45$COPY)
+
+plot(sub45$COPY, type = "l", col = "grey", main = "signal_pass")
+lines(sub45$res2, col = "red")
+
+```
+
+```{r filtering-dplR}
+sub45$res3 = dplR::pass.filt(sub45$COPY, W = c(low/50, high/50), type = "pass")
+plot(sub45$COPY, type = "l", col = "grey", main = "dplR_bw")
+lines(sub45$res3, col = "yellow")
 ```
 
