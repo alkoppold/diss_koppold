@@ -1,0 +1,107 @@
+---
+title: "04_bb_analyses"
+author: "Alina Koppold"
+date: '2022-07-04'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r data-prep}
+load("./data/df_BB_clean.RData")
+df_BB_clean = df_BB_clean %>% filter(blinktime == 90)
+df_sd = df_BB_clean %>% group_by(ID, trialnr, blink, opponent) %>%  summarise(sd_x = sd(COPX), sd_y = sd(COPY))
+
+```
+
+Threat Imminence 
+
+```{r}
+df_ti =df_BB_clean %>% filter(marker =="anticipation") 
+
+df_ti$current_time = as.POSIXct(df_ti$current_time, format = "%d/%m/%Y:%H:%M:%S")
+
+df_ti$current_time <- format(df_ti$current_time, format = "%S")
+
+df_ti = df_ti %>%
+  group_by(ID, trialnr) %>%
+  mutate(seconds = match(paste(current_time), unique(paste(current_time))))
+
+df_ti$session= with(df_ti, ifelse(trialnr < 30, "session1", 
+          ifelse(trialnr >= 30 & trialnr < 61, "session2", "session3"))) 
+
+detach("package:plyr", unload = T)
+df_thi = df_ti %>% group_by(ID, trialnr, blink) %>%  summarise(sd_x = sd(COPX), 
+                                                               sd_y = sd(COPY),
+                                                               seconds = unique(seconds),
+                                                               opponent = unique(opponent))
+
+
+
+# choose session: "s1", "s2", "s3", "all"
+session_of_int = "s3"
+varofint = c("sd_x", "sd_y")
+for (i in 1:length(varofint)) {
+  if (session_of_int == "s2") {
+    df_sub = df_thi %>% filter(between(trialnr, 31, 59))
+  } else if (session_of_int == "s1") {
+    df_sub = df_thi %>% filter(trialnr < 30)
+  } else if (session_of_int == "s3") {
+    df_sub = df_thi %>% filter(trialnr > 60)
+  } else if (session_of_int == "all") {
+    df_sub = df_thi
+  } else {
+    df_sub = 0
+  }
+  library(plyr)
+  d5 = data_summary(df_sub,
+                    varname = varofint[i],
+                    groupnames = c("seconds", "blink"))
+  alinatheme <- readRDS('./figures/alinatheme.rds')
+  p0 = ggplot(d5, aes(x = seconds, y = get(varofint[i]), group = blink)) +
+    geom_line(aes(color = blink)) +
+    geom_point(aes(color = blink)) +
+    labs(title = varofint[i], x = "seconds within trial") +
+    scale_color_manual(
+      "Anticipation condition",
+      values = c("black", "blue", "yellow"),
+      labels = c("threat imminence", "uncertain", "safe")
+    ) +
+    alinatheme
+  print(p0)
+}
+```
+
+
+
+Habituation / initial value dependency
+
+```{r bb-habituation}
+df_ivd = df_ti %>% filter(trialnr <=2)
+detach("package:plyr", unload = TRUE)
+df_ivd = df_ivd %>% select(ID, trialnr, blink, COPX, COPY)  %>% group_by(ID, trialnr, blink) %>% summarise(sd_x = sd(COPX, na.rm = T),sd_y = sd(COPY, na.rm = T)) 
+
+# spaghetti plot from ggvis package
+
+
+varofint = list(c("sd_x", "change of lateral movement"), c("sd_y", "change of anterior movement"))
+
+for (i in 1:length(varofint)) {
+  df_ivd$ID = as.factor(df_ivd$ID)
+  s1 <-
+    ggplot(data = df_ivd, aes(
+      x = as.factor(trialnr),
+      y = get(varofint[[i]][1]),
+      group = ID,
+      color = ID
+    )) +
+    alinatheme +
+    labs(x = "trial", y = varofint[[i]][2]) +
+    geom_line(size = 1) + theme(legend.position = "none") 
+print(s1)
+  
+}
+```
+
