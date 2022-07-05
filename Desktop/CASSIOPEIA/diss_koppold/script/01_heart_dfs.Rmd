@@ -84,7 +84,3 @@ ggplot(data=na.omit(df), aes(x=IBI_order, y=IBI_value, color=blink)) +
   scale_color_manual(values = c("black", "blue", "yellow"))
 ```
 
-```{r heart-rate-variablilty}
-bla
-```
-

@@ -174,7 +174,10 @@ for (i in 0:length(unique(behave_bb$ID))){ #0
 ```
 
 ```{r clean-COPY}
+outlier_all = outlier_all %>% filter(remove == "delete")
 df_BB_clean_Y = anti_join(behave_bb, outlier_all, by = c("ID", "trialnr"))
+df_BB_clean_Y$COPX = NULL
+df_BB_clean_Y$COPXbp = NULL
 ```
 
 
@@ -234,5 +237,12 @@ for (i in 0:length(unique(behave_bb$ID))){ #0
 ```
 
 ```{r clean-COPX}
+outlier_allx = outlier_allx %>% filter(remove == "delete")
 df_BB_clean_X = anti_join(behave_bb, outlier_allx, by = c("ID", "trialnr"))
+df_BB_clean_X$COPY = NULL
+df_BB_clean_X$COPYbp = NULL
+
+df_BB_clean = merge(df_BB_clean_X, df_BB_clean_Y)
+save(df_BB_clean, file = "./data/merged/df_BB_clean.RData")
+
 ```
