@@ -93,11 +93,11 @@ everyother <- function(x) x[seq_along(x) %% 10 == 0]
 # viz 
 t1 = ggplot(data = na.omit(s45), aes(x = trialnr, y = COPYbp, color= outliercheck))+
   geom_line()+
-  geom_vline(xintercept = 30, color = "black")+
-  geom_vline(xintercept = 60, color = "black")+
+  geom_vline(xintercept = 30.5, color = "grey")+
+  geom_vline(xintercept = 60.5, color = "grey")+
   scale_x_discrete(breaks = everyother)+
-  geom_text(aes(x = 36, label = "BREAK 1", y = 0.1), color = "grey", angle = 0)+
-  geom_text(aes(x = 66, label = "BREAK 2", y = 0.1), color = "grey", angle = 0)+
+  geom_text(aes(x = 38, label = "BREAK 1", y = 0.1), color = "grey", angle = 0)+
+  geom_text(aes(x = 68, label = "BREAK 2", y = 0.1), color = "grey", angle = 0)+
   theme_classic()
 t1
 ```
@@ -146,15 +146,15 @@ for (i in 0:length(unique(behave_bb$ID))){ #0
   
   #visualise
   t2 = ggplot(data = na.omit(s5), aes(x=trialnr, y= COPYbp, color=outliercheck))+
-    geom_point(size= 0.5) + theme_classic() +
+    geom_line() + theme_classic() +
     ggtitle("Subject", subject)+
     scale_color_manual(values= c( "black", "red"))+
     geom_line(aes(x = trialnr, y= MeanY), color="blue" ) +
-    geom_vline(xintercept = 30) + 
-    geom_vline(xintercept = 60)+
-    geom_text(aes(x=36, label= "BREAK 1", y=0.1), colour="grey",angle=0) +
+    geom_vline(xintercept = 30.5, colour = "grey") + 
+    geom_vline(xintercept = 60.5, colour = "grey")+
+    geom_text(aes(x=38, label= "BREAK 1", y=0.1), colour="grey",angle=0) +
     scale_x_discrete(breaks = everyother)+
-    geom_text(aes(x=66, label="BREAK 2", y=0.1), colour="grey", angle=0)
+    geom_text(aes(x=68, label="BREAK 2", y=0.1), colour="grey", angle=0)
   print(t2)
   
   # identify outliers within trial
@@ -173,3 +173,66 @@ for (i in 0:length(unique(behave_bb$ID))){ #0
 }
 ```
 
+```{r clean-COPY}
+df_BB_clean_Y = anti_join(behave_bb, outlier_all, by = c("ID", "trialnr"))
+```
+
+
+```{r dataquality-all-subjects}
+
+outlier_allx = data.frame()
+
+for (i in 0:length(unique(behave_bb$ID))){ #0
+  # if(i == 8 || i == 19|| i == 20 || i == 37 || i == 58 || i == 62)
+  #   next
+  s5x = subset (behave_bb, ID == i)
+  subject = s5x %>% select(ID) %>% unique()
+  subject = as.vector(subject)
+  subject = subject[[1]]
+  print (subject)
+  
+  # numbering datapoints
+  s5x = s5x %>% group_by(trialnr) %>% mutate (rown = row_number())
+  
+  # create mean and sd for datapoints within subject
+  s5x_info = s5x %>% group_by(rown) %>% summarise(MeanX = mean(COPXbp, na.rm = T), sdX = sd(COPXbp, na.rm = T), num = n())
+  s5x = merge(s5x, s5x_info, by = "rown") 
+  # identify outliers within subject per trial
+  s5x$outliercheck = ifelse(s5x$COPXbp > s5x$MeanX + (2*s5x$sdX) | s5x$COPXbp < s5x$MeanX -s5x$sdX,
+  "outlier",  "check" )
+  ax =table (s5x$outliercheck)
+  prop.table(ax)
+  print(ax)
+  
+  #visualise
+  t2 = ggplot(data = na.omit(s5x), aes(x=trialnr, y= COPXbp, color=outliercheck))+
+    geom_line() + theme_classic() +
+    ggtitle("Subject", subject)+
+    scale_color_manual(values= c( "black", "red"))+
+    geom_line(aes(x = trialnr, y= MeanX), color="blue" ) +
+    geom_vline(xintercept = 30.5, colour = "grey") + 
+    geom_vline(xintercept = 60.5, colour = "grey")+
+    geom_text(aes(x=38, label= "BREAK 1", y=0.1), colour="grey",angle=0) +
+    scale_x_discrete(breaks = everyother)+
+    geom_text(aes(x=68, label="BREAK 2", y=0.1), colour="grey", angle=0)
+  print(t2)
+  
+  # identify outliers within trial
+  tex = s5x %>% group_by(ID, trialnr, outliercheck) %>% summarise(freq = n())
+  tex_info = tex %>% group_by(trialnr) %>% summarise(Sum_datapointspertrial = sum(freq))
+  tex = merge(tex, tex_info, by = "trialnr")
+  outlier_framex = subset(tex, outliercheck == "outlier")
+  outlier_framex$remove = ifelse(0.5 <= outlier_framex$freq / outlier_framex$Sum_datapointspertrial, "delete", "check")
+  outlier_framex$outl_ratiowithintrial = outlier_framex$freq/ outlier_framex$Sum_datapointspertrial
+  # more than 50% datapoint outliers of a trial -› trial exclusion
+  # checking how many trials are outlier
+  bx = table(outlier_framex$remove)
+  prop.table(bx)
+  print(bx)
+  outlier_allx = rbind(outlier_allx, outlier_framex)
+}
+```
+
+```{r clean-COPX}
+df_BB_clean_X = anti_join(behave_bb, outlier_allx, by = c("ID", "trialnr"))
+```
