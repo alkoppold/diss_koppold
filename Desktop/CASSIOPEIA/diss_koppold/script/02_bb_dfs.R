@@ -27,6 +27,8 @@ tbl_bb <-
 # rename singe ppn typos 
 tbl_bb$ppName[tbl_bb$ppName == "040backspace"] <- "40"
 colnames(tbl_bb)[2] <- "ID"
+tbl_bb$ID[tbl_bb$ID == "2backspaceescape75escape75"] <- "75"
+table(tbl_bb$ID)
 save(tbl_bb, file = "./data/merged/tbl_bb.RData")
 
 
