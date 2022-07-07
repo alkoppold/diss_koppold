@@ -149,7 +149,7 @@ for (i in 0:length(unique(behave_bb$ID))){ #0
     geom_line() + theme_classic() +
     ggtitle("Subject", subject)+
     scale_color_manual(values= c( "black", "red"))+
-    geom_line(aes(x = trialnr, y= MeanY), color="blue" ) +
+    geom_line(aes(x = trialnr, y= MeanY), color="cyan1" ) +
     geom_vline(xintercept = 30.5, colour = "grey") + 
     geom_vline(xintercept = 60.5, colour = "grey")+
     geom_text(aes(x=38, label= "BREAK 1", y=0.1), colour="grey",angle=0) +
@@ -212,7 +212,7 @@ for (i in 0:length(unique(behave_bb$ID))){ #0
     geom_line() + theme_classic() +
     ggtitle("Subject", subject)+
     scale_color_manual(values= c( "black", "red"))+
-    geom_line(aes(x = trialnr, y= MeanX), color="blue" ) +
+    geom_line(aes(x = trialnr, y= MeanX), color="cyan1" ) +
     geom_vline(xintercept = 30.5, colour = "grey") + 
     geom_vline(xintercept = 60.5, colour = "grey")+
     geom_text(aes(x=38, label= "BREAK 1", y=0.1), colour="grey",angle=0) +
