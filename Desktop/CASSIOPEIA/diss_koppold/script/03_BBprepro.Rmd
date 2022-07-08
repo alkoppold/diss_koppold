@@ -38,7 +38,7 @@ freqz(bf, Fs = 100)
 
 sub45$res2 = signal::filter(bf, sub45$COPY)
 
-plot(sub45$COPY, type = "l", col = "grey", main = "signal_pass")
+plot(sub45$COPY, type = "l", col = "grey", main = "signal_butterworth")
 lines(sub45$res2, col = "red")
 
 ```
@@ -91,14 +91,16 @@ s45$trialnr = as.factor(s45$trialnr)
 everyother <- function(x) x[seq_along(x) %% 10 == 0]
 
 # viz 
-t1 = ggplot(data = na.omit(s45), aes(x = trialnr, y = COPYbp, color= outliercheck))+
+t1 = ggplot(data = s45, aes(x = trialnr, y = COPYbp, color= outliercheck))+
   geom_line()+
   geom_vline(xintercept = 30.5, color = "grey")+
   geom_vline(xintercept = 60.5, color = "grey")+
   scale_x_discrete(breaks = everyother)+
+  scale_color_manual(values= c( "black", "red"))+
   geom_text(aes(x = 38, label = "BREAK 1", y = 0.1), color = "grey", angle = 0)+
   geom_text(aes(x = 68, label = "BREAK 2", y = 0.1), color = "grey", angle = 0)+
-  theme_classic()
+  theme_classic() + theme(axis.text.x = element_text(size = 14),
+                          axis.text.y = element_text(size = 14))
 t1
 ```
 
@@ -145,7 +147,7 @@ for (i in 0:length(unique(behave_bb$ID))){ #0
   print(a)
   
   #visualise
-  t2 = ggplot(data = na.omit(s5), aes(x=trialnr, y= COPYbp, color=outliercheck))+
+  t2 = ggplot(data = s5, aes(x=trialnr, y= COPYbp, color=outliercheck))+
     geom_line() + theme_classic() +
     ggtitle("Subject", subject)+
     scale_color_manual(values= c( "black", "red"))+
@@ -208,7 +210,7 @@ for (i in 0:length(unique(behave_bb$ID))){ #0
   print(ax)
   
   #visualise
-  t2 = ggplot(data = na.omit(s5x), aes(x=trialnr, y= COPXbp, color=outliercheck))+
+  t2 = ggplot(data = s5x, aes(x=trialnr, y= COPXbp, color=outliercheck))+
     geom_line() + theme_classic() +
     ggtitle("Subject", subject)+
     scale_color_manual(values= c( "black", "red"))+
