@@ -63,7 +63,9 @@ df_obsCount= behave_bb %>% group_by(ID) %>% summarise(nObs = n())
 df_obsCount$Mean =mean(df_obsCount$nObs, na.rm = T)
 df_obsCount$std =sd(df_obsCount$nObs, na.rm = T)
 df_obsCount$outliercheck = ifelse(df_obsCount$nObs > df_obsCount$Mean + (2*df_obsCount$std) | df_obsCount$nObs < df_obsCount$Mean - (2*df_obsCount$std), "outlier", "check")
-table(df_obsCount$outliercheck)
+ov = table(df_obsCount$outliercheck)
+colorDF::colorDF(head(ov), theme = "wb")
+
 ```
 
 # Dataquality
