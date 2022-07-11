@@ -7,6 +7,9 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(ggplot2)
 ```
 
 ```{r data-prep}
@@ -146,12 +149,15 @@ for (i in 1:length(varofint)) {
 Habituation / initial value dependency
 
 ```{r bb-habituation}
+# extract first trials
 df_BB_clean$trialnr =as.numeric(as.character(df_BB_clean$trialnr))
+getN = df_BB_clean %>% slice(ID, trialnr) %>% group_by(ID, trialnr) %>% unique() %>% add_count()
+df_ivd1 = df_BB_clean %>% filter(trialnr <=5)
+df_ivd1$ID = as.numeric(as.character(df_ivd1$ID))
 
 
-df_ivd = df_BB_clean %>% filter(trialnr <=2)
-detach("package:plyr", unload = TRUE)
-df_ivd = df_ivd %>% select(ID, trialnr, blink, COPXbp, COPYbp)  %>% group_by(ID, trialnr, blink) %>% summarise(sd_x = sd(COPXbp, na.rm = T),sd_y = sd(COPYbp, na.rm = T)) 
+#detach("package:plyr", unload = TRUE)
+df_ivd = df_ivd1   %>% group_by(ID, trialnr, blink) %>% summarise(sd_x = sd(COPXbp),sd_y = sd(COPYbp)) %>% arrange(ID, trialnr)
 
 # spaghetti plot from ggvis package
 
