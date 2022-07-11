@@ -45,12 +45,32 @@ df_ti$current_time <- format(df_ti$current_time, format = "%S")
 
 df_ti = df_ti %>%
   group_by(ID, trialnr) %>%
-  mutate(seconds = match(paste(current_time), unique(paste(current_time))))
+  mutate(seconds = match(paste(current_time), unique(paste(current_time)))-1)
 table(df_ti$seconds)
-df_ti = df_ti %>% filter(seconds < 13)
+df_ti = df_ti %>% filter(seconds < 12)
+
+
+
+# dplyr tricks testing 
+df_test = df_ti %>% rowwise() %>%
+ # arrange(ID, desc(trialnr)) %>%
+ # group_by(ID, trialnr, seconds) %>%
+  mutate(min_xy = min(COPXbp, COPYbp)) %>%
+  select(min_xy, everything()) %>% #at beginning of frame
+  as.data.frame() %>%
+  mutate_if(is.character, toupper) %>%
+  head()
+
+df_sanity = df_test %>% count(seconds, name = "Seconds.Count") #add_count(seconds)
+colorDF::colorDF(head(df_sanity), theme = "wb")
+
+
+# continuing analysis
+# implement second 0 (start), plot with 0 
+
 
 df_ti$session= with(df_ti, ifelse(trialnr < 30, "session1", 
-          ifelse(trialnr >= 30 & trialnr < 61, "session2", "session3"))) 
+          ifelse(trialnr >= 30 & trialnr < 61, "session2", "session3"))) #%>% mutate(case_when)
 
 detach("package:plyr", unload = T)
 df_thi = df_ti %>% group_by(ID, trialnr, blink) %>%  summarise(sd_x = sd(COPXbp), 
@@ -95,16 +115,16 @@ for (i in 1:length(varofint)) {
 
 # choose session: "s1", "s2", "s3", "all"
 session_of_int = "all"
-varofint = c("sd_x", "sd_y")
+varofint = c("COPXbp", "COPYbp")
 for (i in 1:length(varofint)) {
   if (session_of_int == "s2") {
-    df_sub = df_thi %>% filter(between(trialnr, 31, 59))
+    df_sub = df_ti %>% filter(between(trialnr, 31, 59))
   } else if (session_of_int == "s1") {
-    df_sub = df_thi %>% filter(trialnr < 30)
+    df_sub = df_ti %>% filter(trialnr < 30)
   } else if (session_of_int == "s3") {
-    df_sub = df_thi %>% filter(trialnr > 60)
+    df_sub = df_ti %>% filter(trialnr > 60)
   } else if (session_of_int == "all") {
-    df_sub = df_thi
+    df_sub = df_ti
   } else {
     df_sub = 0
   }
@@ -154,5 +174,16 @@ for (i in 1:length(varofint)) {
 print(s1)
   
 }
+```
+
+```{r baseline correction}
+# subtrackting baseline 
+
+```
+
+```{r}
+# plot difference in second (min max) as bin within trial / over trials 
+#  slice_max(mass, n = 3, with_ties = F) %>%  #max difference of movement within second
+
 ```
 
