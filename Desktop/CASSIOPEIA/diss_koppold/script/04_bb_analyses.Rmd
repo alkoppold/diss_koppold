@@ -75,7 +75,7 @@ colorDF::colorDF(head(df_sanity), theme = "wb")
 df_ti$session= with(df_ti, ifelse(trialnr < 30, "session1", 
           ifelse(trialnr >= 30 & trialnr < 61, "session2", "session3"))) #%>% mutate(case_when)
 
-detach("package:plyr", unload = T)
+#detach("package:plyr", unload = T)
 df_thi = df_ti %>% group_by(ID, trialnr, blink) %>%  summarise(sd_x = sd(COPXbp), 
                                                                sd_y = sd(COPYbp),
                                                                seconds = unique(seconds),
@@ -116,6 +116,8 @@ for (i in 1:length(varofint)) {
   print(p0)
 }
 
+df_ti = df_ti %>% filter(ID == "81")
+
 # choose session: "s1", "s2", "s3", "all"
 session_of_int = "all"
 varofint = c("COPXbp", "COPYbp")
@@ -151,12 +153,12 @@ Habituation / initial value dependency
 ```{r bb-habituation}
 # extract first trials
 df_BB_clean$trialnr =as.numeric(as.character(df_BB_clean$trialnr))
-getN = df_BB_clean %>% slice(ID, trialnr) %>% group_by(ID, trialnr) %>% unique() %>% add_count()
-df_ivd1 = df_BB_clean %>% filter(trialnr <=5)
-df_ivd1$ID = as.numeric(as.character(df_ivd1$ID))
+detach("package:plyr", unload = TRUE)
+getN = df_BB_clean %>% select(ID, trialnr) %>% group_by(ID, trialnr) %>% unique() %>% add_count()
+df_ivd1 = df_BB_clean %>% filter(trialnr <=2)
+#df_ivd1$ID = as.numeric(as.character(df_ivd1$ID))
 
 
-#detach("package:plyr", unload = TRUE)
 df_ivd = df_ivd1   %>% group_by(ID, trialnr, blink) %>% summarise(sd_x = sd(COPXbp),sd_y = sd(COPYbp)) %>% arrange(ID, trialnr)
 
 # spaghetti plot from ggvis package
